@@ -1,6 +1,8 @@
+%define _buildid .1
+
 Name: nodejs
 Version: 4.2.3
-Release: 1nodesource%{?dist}
+Release: 1%{?_buildid}%{?dist}
 Summary: JavaScript runtime
 License: MIT and ASL 2.0 and ISC and BSD
 Group: Development/Languages
