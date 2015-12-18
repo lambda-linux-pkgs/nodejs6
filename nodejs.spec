@@ -12,15 +12,9 @@ ExclusiveArch: %{ix86} x86_64 %{arm}
 # For NodeSource, we use the sources direct from nodejs.org/dist
 Source0: node-v%{version}.tar.gz
 
-Patch1: configure-python26.patch
-Patch2: install-python26.patch
-Patch3: npm-python26.patch
-
 %if 0%{?rhel} == 5
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildArch: %{_target_cpu}
-BuildRequires: python26
-Requires: python26
 BuildRequires: devtoolset-2-gcc >= 4.8
 BuildRequires: devtoolset-2-gcc-c++ >= 4.8
 %else
