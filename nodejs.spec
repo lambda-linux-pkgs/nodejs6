@@ -12,9 +12,9 @@ ExclusiveArch: %{ix86} x86_64 %{arm}
 # For NodeSource, we use the sources direct from nodejs.org/dist
 Source0: node-v%{version}.tar.gz
 
-BuildRequires: python
+BuildRequires: python27
 BuildRequires: libicu-devel
-Requires: python
+Requires: python27
 Requires: libicu
 
 #this corresponds to the "engine" requirement in package.json
