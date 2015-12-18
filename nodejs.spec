@@ -120,6 +120,12 @@ cp -p common.gypi %{buildroot}%{_datadir}/node
 %{_defaultdocdir}/%{name}-docs-%{version}
 
 %changelog
+* Fri Dec 18 2015 Rajiv M Ranganath <rajiv.ranganath@atihita.com> 4.2.3-1
+- Adapt for `python27`
+- Remove RHEL5 artifacts
+- Remove `python26` artifacts
+- Import source package NODESOURCE/nodejs-4.2.3-1nodesource.el7.centos.src.rpm
+
 * Thu Dec 03 2015 Chris Lea <chl@nodesource.com> - 4.2.3
 - https://nodejs.org/en/blog/release/v4.2.3/
 
