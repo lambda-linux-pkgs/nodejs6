@@ -12,17 +12,10 @@ ExclusiveArch: %{ix86} x86_64 %{arm}
 # For NodeSource, we use the sources direct from nodejs.org/dist
 Source0: node-v%{version}.tar.gz
 
-%if 0%{?rhel} == 5
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
-BuildArch: %{_target_cpu}
-BuildRequires: devtoolset-2-gcc >= 4.8
-BuildRequires: devtoolset-2-gcc-c++ >= 4.8
-%else
 BuildRequires: python
 BuildRequires: libicu-devel
 Requires: python
 Requires: libicu
-%endif
 
 #this corresponds to the "engine" requirement in package.json
 Provides: nodejs(engine) = %{version}
@@ -60,35 +53,16 @@ The API documentation for the Node.js JavaScript runtime.
 %prep
 %setup -q -n node-v%{version}
 
-%if 0%{?rhel} == 5
-%patch1 -p0
-%patch2 -p0
-%patch3 -p0
-%endif
-
 %build
 export CFLAGS='%{optflags} -g -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64'
 export CXXFLAGS='%{optflags} -g -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64'
 
-%if 0%{?rhel} == 5
-. /opt/rh/devtoolset-2/enable
 ./configure --prefix=%{_prefix} \
            --without-dtrace \
            --with-intl=system-icu
-%else
-./configure --prefix=%{_prefix} \
-           --without-dtrace \
-           --with-intl=system-icu
-%endif
 
 # Setting BUILDTYPE=Debug builds both release and debug binaries
-%if 0%{?rhel} == 5
-. /opt/rh/devtoolset-2/enable
-cc -v
 make BUILDTYPE=Debug %{?_smp_mflags}
-%else
-make BUILDTYPE=Debug %{?_smp_mflags}
-%endif
 
 %pre
 if [ -d /usr/lib/node_modules/npm ]; then
