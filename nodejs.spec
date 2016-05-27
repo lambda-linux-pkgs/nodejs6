@@ -1,6 +1,8 @@
 %define _buildid .1
 
-Name: nodejs
+%global orig_name nodejs
+
+Name: nodejs6
 Version: 4.2.3
 Release: 1%{?_buildid}%{?dist}
 Summary: JavaScript runtime
