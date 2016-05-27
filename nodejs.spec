@@ -126,6 +126,15 @@ cp -p common.gypi %{buildroot}%{_datadir}/node
 %{_defaultdocdir}/%{name}-docs-%{version}
 
 %changelog
+* Fri May 27 2016 Rajiv M Ranganath <rajiv.ranganath@atihita.com> - 6.2.0-1
+- nodejs.spec: Update to v6.2.0
+- Add `node-v6.2.0.tar.gz`, `icu4c-56_1-src.tgz`
+- nodejs.spec: Rename package to `nodejs6`
+- Remove `node-v4.2.3.tar.gz`
+- .gitfat: Change `nodejs` to `nodejs6`
+- .gitattributes: Add `*.tgz` files to git-fat
+- Add `README.md`
+
 * Fri Dec 18 2015 Rajiv M Ranganath <rajiv.ranganath@atihita.com> 4.2.3-1
 - Adapt for `python27`
 - Remove RHEL5 artifacts
