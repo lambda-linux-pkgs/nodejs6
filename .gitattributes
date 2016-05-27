@@ -1,1 +1,2 @@
 *.tar.gz filter=fat -text
+*.tgz filter=fat -text
