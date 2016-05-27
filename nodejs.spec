@@ -3,7 +3,7 @@
 %global orig_name nodejs
 
 Name: nodejs6
-Version: 4.2.3
+Version: 6.2.0
 Release: 1%{?_buildid}%{?dist}
 Summary: JavaScript runtime
 License: MIT and ASL 2.0 and ISC and BSD
@@ -15,14 +15,17 @@ ExclusiveArch: %{ix86} x86_64 %{arm}
 
 # For NodeSource, we use the sources direct from nodejs.org/dist
 Source0: node-v%{version}.tar.gz
+Source1: icu4c-56_1-src.tgz
 
 BuildRequires: python27
-BuildRequires: libicu-devel
 Requires: python27
-Requires: libicu
 
 #this corresponds to the "engine" requirement in package.json
 Provides: nodejs(engine) = %{version}
+
+# Lambda Linux - We add this so there can be only one LTS version of
+# NodeJS at a time
+Conflicts: nodejs(engine) < 6
 
 # Node.js currently has a conflict with the 'node' package in Fedora
 # The ham-radio group has agreed to rename their binary for us, but
@@ -63,7 +66,8 @@ export CXXFLAGS='%{optflags} -g -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64'
 
 ./configure --prefix=%{_prefix} \
            --without-dtrace \
-           --with-intl=system-icu
+           --with-intl=small-icu \
+           --with-icu-source=%{SOURCE1}
 
 # Setting BUILDTYPE=Debug builds both release and debug binaries
 make BUILDTYPE=Debug %{?_smp_mflags}
@@ -103,7 +107,7 @@ mkdir -p %{buildroot}%{_datadir}/node
 cp -p common.gypi %{buildroot}%{_datadir}/node
 
 %files
-%doc AUTHORS CHANGELOG.md COLLABORATOR_GUIDE.md CONTRIBUTING.md GOVERNANCE.md LICENSE README.md ROADMAP.md WORKING_GROUPS.md
+%doc AUTHORS CHANGELOG.md COLLABORATOR_GUIDE.md CONTRIBUTING.md GOVERNANCE.md LICENSE README.md ROADMAP.md WORKING_GROUPS.md CODE_OF_CONDUCT.md
 %{_bindir}/node
 %{_bindir}/npm
 %{_mandir}/man1/node.*
