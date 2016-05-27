@@ -1,2 +1,2 @@
 [rsync]
-remote = /tmp/git-blobs.lambda-linux.io/nodejs
+remote = /tmp/git-blobs.lambda-linux.io/nodejs6
